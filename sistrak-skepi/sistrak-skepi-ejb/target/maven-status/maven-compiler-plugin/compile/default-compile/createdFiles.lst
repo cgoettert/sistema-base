@@ -1,5 +1,0 @@
-br/com/kopp/ejb/UsuarioEJB.class
-br/com/kopp/model/Usuario.class
-br/com/kopp/dao/UsuarioDAO.class
-br/com/kopp/dao/UsuarioDAOImpl.class
-br/com/kopp/dao/AbstractDAO.class
