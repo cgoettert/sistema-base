@@ -49,9 +49,15 @@
         </dependency>
         <dependency>
             <groupId>br.com.kopp</groupId>
-            <artifactId>sistrak-skepi-web</artifactId>
+            <artifactId>sistrak-skepi-rest</artifactId>
             <version>1.0</version>
             <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>br.com.kopp</groupId>
+            <artifactId>sistrak-skepi-api</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

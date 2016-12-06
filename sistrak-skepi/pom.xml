@@ -8,7 +8,8 @@
   <name>sistrak-skepi</name>
   <modules>
     <module>sistrak-skepi-ear</module>
-    <module>sistrak-skepi-web</module>
     <module>sistrak-skepi-ejb</module>
+    <module>sistrak-skepi-api</module>
+    <module>sistrak-skepi-rest</module>
   </modules>
 </project>

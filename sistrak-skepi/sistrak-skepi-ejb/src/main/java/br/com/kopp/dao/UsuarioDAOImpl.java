@@ -1,6 +1,6 @@
 package br.com.kopp.dao;
 
-import br.com.kopp.sistrak.model.Usuario;
+import br.com.kopp.model.Usuario;
 import javax.enterprise.context.RequestScoped;
 
 /**
