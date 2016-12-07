@@ -1,6 +1,6 @@
-package br.com.kopp.dao;
+package br.com.kopp.sistrak.skepi.dao;
 
-import br.com.kopp.model.Usuario;
+import br.com.kopp.sistrak.skepi.model.Usuario;
 import javax.enterprise.context.RequestScoped;
 
 /**

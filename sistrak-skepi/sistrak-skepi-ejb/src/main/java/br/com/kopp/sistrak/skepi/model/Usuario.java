@@ -1,4 +1,4 @@
-package br.com.kopp.model;
+package br.com.kopp.sistrak.skepi.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

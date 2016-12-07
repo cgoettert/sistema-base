@@ -23,7 +23,7 @@
         <dependency>
             <groupId>br.com.kopp</groupId>
             <artifactId>sistrak-skepi-api</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

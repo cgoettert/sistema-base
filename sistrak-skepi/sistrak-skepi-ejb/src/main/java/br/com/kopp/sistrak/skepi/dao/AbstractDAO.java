@@ -1,4 +1,4 @@
-package br.com.kopp.dao;
+package br.com.kopp.sistrak.skepi.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;

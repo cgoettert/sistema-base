@@ -1,6 +1,6 @@
-package br.com.kopp;
+package br.com.kopp.sistrak.skepi.rest;
 
-import br.com.kopp.api.UsuarioEJBLocal;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;

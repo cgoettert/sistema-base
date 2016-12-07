@@ -1,10 +1,10 @@
-package br.com.kopp.ejb;
+package br.com.kopp.sistrak.skepi.servicos.ejb;
 
-import br.com.kopp.api.UsuarioEJBLocal;
-import br.com.kopp.api.UsuarioEJBRemote;
-import br.com.kopp.dao.UsuarioDAO;
-import br.com.kopp.model.Usuario;
-import br.com.kopp.dto.UsuarioDTO;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBRemote;
+import br.com.kopp.sistrak.skepi.dao.UsuarioDAO;
+import br.com.kopp.sistrak.skepi.model.Usuario;
+import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
 import br.com.kopp.util.DozerUtil;
 import java.util.List;
 import javax.ejb.Stateless;

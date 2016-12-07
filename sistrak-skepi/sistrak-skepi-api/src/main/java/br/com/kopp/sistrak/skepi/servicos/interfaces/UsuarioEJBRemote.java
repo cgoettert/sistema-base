@@ -1,6 +1,6 @@
-package br.com.kopp.api;
+package br.com.kopp.sistrak.skepi.servicos.interfaces;
 
-import br.com.kopp.dto.UsuarioDTO;
+import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
 import javax.ejb.Remote;
 
 /**
