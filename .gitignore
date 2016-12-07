@@ -1,7 +1,7 @@
 /sistrak-skepi/sistrak-skepi-api/target/
-/sistrak-util/target/
 /sistrak-skepi/sistrak-skepi-rest/target/
 /sistrak-skepi/sistrak-skepi-ejb/target/
 /sistrak-skepi/sistrak-skepi-ear/target/
-nb-configuration.xml
+/kopp-framework/target/
 /kopp-util/target/
+nb-configuration.xml
