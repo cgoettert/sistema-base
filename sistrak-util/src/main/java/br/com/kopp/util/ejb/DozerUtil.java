@@ -1,4 +1,4 @@
-package br.com.kopp.util;
+package br.com.kopp.util.ejb;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.kopp.sistrak.skepi.dao;
+package br.com.kopp.util.ejb;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
  */
 public abstract class AbstractDAO<T> {
 
-    @PersistenceContext(unitName = "br.com.kopp_sistrak-skepi-ejb_ejb_1.0PU")
+    @PersistenceContext
     private EntityManager em;
 
     private final Class<T> entityClass;
