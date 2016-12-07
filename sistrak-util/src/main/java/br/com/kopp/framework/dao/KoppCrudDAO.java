@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author cgoettert
  */
-public interface CrudDAO<T> {
+public interface KoppCrudDAO<T> {
 
     void create(T obj);
 

@@ -22,7 +22,12 @@
     <dependencies>
         <dependency>
             <groupId>br.com.kopp</groupId>
-            <artifactId>sistrak-util</artifactId>
+            <artifactId>kopp-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.kopp</groupId>
+            <artifactId>kopp-framework</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

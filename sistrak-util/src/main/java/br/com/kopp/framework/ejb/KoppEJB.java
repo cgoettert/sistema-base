@@ -1,18 +1,18 @@
 package br.com.kopp.framework.ejb;
 
-import br.com.kopp.framework.mapper.Mapper;
 import javax.inject.Inject;
+import br.com.kopp.framework.mapper.KoppMapper;
 
 /**
  *
  * @author cgoettert
  */
-public abstract class EJBImpl {
+public abstract class KoppEJB {
     
     @Inject
-    private Mapper mapper;
+    private KoppMapper mapper;
     
-    protected Mapper getMapper() {
+    protected KoppMapper getMapper() {
         return this.mapper;
     }
     

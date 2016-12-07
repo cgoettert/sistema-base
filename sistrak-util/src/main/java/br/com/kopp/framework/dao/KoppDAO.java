@@ -7,14 +7,14 @@ import javax.persistence.PersistenceContext;
  *
  * @author cgoettert
  */
-public abstract class DAOImpl<T> {
+public abstract class KoppDAO<T> {
 
     @PersistenceContext
     private EntityManager em;
 
     private final Class<T> entityClass;
 
-    public DAOImpl(Class<T> entityClass) {
+    public KoppDAO(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 

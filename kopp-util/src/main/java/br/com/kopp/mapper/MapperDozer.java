@@ -1,5 +1,6 @@
-package br.com.kopp.framework.mapper;
+package br.com.kopp.mapper;
 
+import br.com.kopp.framework.mapper.KoppMapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.Dependent;
@@ -11,7 +12,7 @@ import org.dozer.Mapper;
  * @author cgoettert
  */
 @Dependent
-public class MapperDozer implements br.com.kopp.framework.mapper.Mapper {
+public class MapperDozer implements KoppMapper {
 
     @Override
     public <U> U map(final Object source, final Class<U> destinationClass) {
