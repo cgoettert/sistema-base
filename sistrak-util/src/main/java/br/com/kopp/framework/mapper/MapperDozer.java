@@ -1,7 +1,8 @@
-package br.com.kopp.util.ejb;
+package br.com.kopp.framework.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.enterprise.context.Dependent;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -9,13 +10,16 @@ import org.dozer.Mapper;
  *
  * @author cgoettert
  */
-public class DozerUtil {
+@Dependent
+public class MapperDozer implements br.com.kopp.framework.mapper.Mapper {
 
-    public static <U> U map(final Object source, final Class<U> destinationClass) {
+    @Override
+    public <U> U map(final Object source, final Class<U> destinationClass) {
         return new DozerBeanMapper().map(source, destinationClass);
     };
 
-    public static <T, U> ArrayList<U> mapList(final List<T> source, final Class<U> destType) {
+    @Override
+    public <T, U> ArrayList<U> mapList(final List<T> source, final Class<U> destType) {
         final Mapper mapper = new DozerBeanMapper();
         final ArrayList<U> dest = new ArrayList<>();
 

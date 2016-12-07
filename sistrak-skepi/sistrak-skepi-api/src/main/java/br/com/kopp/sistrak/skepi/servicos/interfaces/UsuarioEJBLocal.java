@@ -15,6 +15,6 @@ public interface UsuarioEJBLocal {
     
     public Integer count();
 
-    List<UsuarioDTO> getAll();
+    public List<UsuarioDTO> getAll();
     
 }

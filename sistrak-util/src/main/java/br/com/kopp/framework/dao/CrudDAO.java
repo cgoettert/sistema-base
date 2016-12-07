@@ -1,4 +1,4 @@
-package br.com.kopp.util.ejb;
+package br.com.kopp.framework.dao;
 
 import java.util.List;
 
