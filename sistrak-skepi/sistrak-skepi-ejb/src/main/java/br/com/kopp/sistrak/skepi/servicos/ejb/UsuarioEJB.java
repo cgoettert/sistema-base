@@ -1,6 +1,10 @@
 package br.com.kopp.sistrak.skepi.servicos.ejb;
 
+import br.com.kopp.framework.code.PagamentoCode;
+import br.com.kopp.framework.code.ValidacaoCode;
 import br.com.kopp.framework.ejb.KoppEJB;
+import br.com.kopp.framework.exception.KoppException;
+import br.com.kopp.framework.exception.ValidacaoException;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 import br.com.kopp.sistrak.skepi.dao.UsuarioDAO;
 import br.com.kopp.sistrak.skepi.model.Usuario;
@@ -25,7 +29,13 @@ public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
     }
 
     @Override
-    public UsuarioDTO get(Integer id) {
+    public UsuarioDTO get(Integer id) throws KoppException {
+        int minVal = 0;
+        
+        if (id < minVal) {
+            throw new ValidacaoException(ValidacaoCode.VALOR_MENOR_QUE_MINIMO, minVal, id);
+        }
+
         Usuario usuario = usuarioDAO.find(id);
         return getMapper().map(usuario, UsuarioDTO.class);
     }

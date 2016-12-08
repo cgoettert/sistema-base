@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.skepi.servicos.interfaces;
 
+import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
 import java.util.List;
 import javax.ejb.Local;
@@ -11,7 +12,7 @@ import javax.ejb.Local;
 @Local
 public interface UsuarioEJBLocal {
 
-    public UsuarioDTO get(Integer id);
+    public UsuarioDTO get(Integer id) throws KoppException;
     
     public Integer count();
 

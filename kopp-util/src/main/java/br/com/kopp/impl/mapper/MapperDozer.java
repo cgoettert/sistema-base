@@ -1,9 +1,9 @@
-package br.com.kopp.mapper;
+package br.com.kopp.impl.mapper;
 
 import br.com.kopp.framework.mapper.KoppMapper;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -11,7 +11,7 @@ import org.dozer.Mapper;
  *
  * @author cgoettert
  */
-@Dependent
+@RequestScoped
 public class MapperDozer implements KoppMapper {
 
     @Override

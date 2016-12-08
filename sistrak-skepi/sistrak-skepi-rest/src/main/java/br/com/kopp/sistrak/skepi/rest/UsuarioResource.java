@@ -1,5 +1,7 @@
 package br.com.kopp.sistrak.skepi.rest;
 
+import br.com.kopp.framework.bundles.KoppMessage;
+import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 import javax.ejb.EJB;
 import javax.ws.rs.Produces;
@@ -21,7 +23,7 @@ public class UsuarioResource {
 
     @EJB
     private UsuarioEJBLocal usuarioLocal;
-    
+
     /**
      * Retrieves representation of an instance of br.com.kopp.GenericResource
      *
@@ -33,7 +35,7 @@ public class UsuarioResource {
     public Response get(@PathParam("id") Integer id) {
         return Response.ok("not implemented").build();
     }
-    
+
     /**
      * Retrieves representation of an instance of br.com.kopp.GenericResource
      *
@@ -42,6 +44,13 @@ public class UsuarioResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response get() {
+
+        try {
+            usuarioLocal.get(-1);
+        } catch (KoppException ex) {
+            System.out.println(KoppMessage.getText(ex.getCode(), ex.getParams()));
+        }
+
         return Response.ok(usuarioLocal.getAll()).build();
     }
 
