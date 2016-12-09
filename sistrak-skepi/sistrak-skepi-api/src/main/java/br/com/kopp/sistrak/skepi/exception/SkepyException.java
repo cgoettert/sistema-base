@@ -17,14 +17,4 @@ public class SkepyException extends KoppException {
         super(code, params);
     }
 
-    @Override
-    public MessageCode getCode() {
-        return super.getCode();
-    }
-
-    @Override
-    public Object[] getParams() {
-        return super.getParams();
-    }
-
 }

@@ -1,7 +1,6 @@
 package br.com.kopp.sistrak.skepi.rest;
 
 import br.com.kopp.framework.message.FeedBuilder;
-import br.com.kopp.framework.message.KoppMessage;
 import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.framework.message.code.KoppCode;

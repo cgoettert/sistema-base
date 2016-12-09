@@ -26,16 +26,6 @@ public class SkepyMessage extends KoppMessage implements MessageBundle {
     }
 
     @Override
-    public MessageDTO getText(KoppException koppException) {
-        return this.getText(koppException.getCode(), koppException.getParams());
-    }
-
-    @Override
-    public MessageDTO getText(MessageCode code) {
-        return this.getText(code, new Object[0]);
-    }
-
-    @Override
     public MessageDTO getText(MessageCode code, Object... params) {
         try {
             return super.getText(this.bundle, code.getType(), code.getCode(), params);

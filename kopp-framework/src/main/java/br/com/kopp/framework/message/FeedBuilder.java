@@ -1,6 +1,5 @@
 package br.com.kopp.framework.message;
 
-import br.com.kopp.framework.message.MessageDTO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,7 @@ public class FeedBuilder {
 
     public FeedBuilder() {
         this.feeds = new HashMap<>();
-        this.feeds.put(MESSAGE_TYPE, new ArrayList<MessageDTO>());
+        this.feeds.put(MESSAGE_TYPE, new ArrayList<>());
     }
 
     public FeedBuilder add(Object obj) {
