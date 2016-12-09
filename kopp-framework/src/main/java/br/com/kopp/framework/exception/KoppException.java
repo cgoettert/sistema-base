@@ -1,6 +1,6 @@
 package br.com.kopp.framework.exception;
 
-import br.com.kopp.framework.code.ErrorCode;
+import br.com.kopp.framework.message.code.MessageCode;
 
 /**
  *
@@ -8,22 +8,22 @@ import br.com.kopp.framework.code.ErrorCode;
  */
 public class KoppException extends Exception {
 
-    private ErrorCode code;
+    private MessageCode code;
     private Object[] params;
 
     public KoppException() {
     }
 
-    public KoppException(ErrorCode code) {
+    public KoppException(MessageCode code) {
         this.code = code;
     }
 
-    public KoppException(ErrorCode code, Object... params) {
+    public KoppException(MessageCode code, Object... params) {
         this.code = code;
         this.params = params;
     }
 
-    public ErrorCode getCode() {
+    public MessageCode getCode() {
         return code;
     }
 
