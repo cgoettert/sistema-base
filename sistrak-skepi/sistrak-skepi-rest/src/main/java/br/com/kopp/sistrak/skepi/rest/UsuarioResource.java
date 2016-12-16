@@ -29,7 +29,7 @@ public class UsuarioResource {
 
     @EJB
     private UsuarioEJBLocal usuarioLocal;
-    
+
     @Inject
     private MessageBundle skepyMessage;
 

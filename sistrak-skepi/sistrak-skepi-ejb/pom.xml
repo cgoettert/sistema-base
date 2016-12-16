@@ -21,6 +21,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-cdi</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+        <dependency>
             <groupId>br.com.kopp</groupId>
             <artifactId>kopp-util</artifactId>
             <version>${project.version}</version>

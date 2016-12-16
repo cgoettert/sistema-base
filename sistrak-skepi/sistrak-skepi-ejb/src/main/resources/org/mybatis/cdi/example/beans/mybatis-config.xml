@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="wildfly">
+        <environment id="wildfly">
+            <transactionManager type="JDBC"/>
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:/SistrakDS"/>
+                <!-- data source should be defined in tomee.xml as follows:
+                    <Resource id="DummyDS" type="DataSource">
+                        JdbcDriver com.mysql.jdbc.Driver
+                        JdbcUrl jdbc:mysql://localhost/dummy
+                        UserName root
+                        jtaManaged = true
+                    </Resource>
+                -->
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--<package name="org.mybatis.builder"/>-->
+        <mapper resource="br/com/kopp/sistrak/skepi/xml/TransacaoMapper.xml"/>
+        <mapper resource="br/com/kopp/sistrak/skepi/xml/UsuarioMapper.xml"/>
+    </mappers>
+</configuration>

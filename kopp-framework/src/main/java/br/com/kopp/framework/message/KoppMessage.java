@@ -4,14 +4,15 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import br.com.kopp.framework.message.code.MessageCode;
 import br.com.kopp.framework.exception.KoppException;
+import java.util.MissingResourceException;
 
 /**
  *
  * @author cgoettert
  */
-public class KoppMessage implements MessageBundle {
+public abstract class KoppMessage implements MessageBundle {
 
-    private static final String IDENT = "kopp";
+    private static final String IDENT = "messages";
 
     private final ResourceBundle bundle;
 
@@ -19,23 +20,21 @@ public class KoppMessage implements MessageBundle {
         this.bundle = ResourceBundle.getBundle(IDENT);
     }
     
-    @Override
-    public MessageDTO getText(KoppException koppException) {
-        return getText(koppException.getCode(), koppException.getParams());
+    protected MessageDTO getText(ResourceBundle bundle, MessageCode code, Object... params) {
+        try {
+            return new MessageDTO(code.getType(), MessageFormat.format(bundle.getString(code.getCode()), params));
+        } catch (MissingResourceException mre) {
+            return new MessageDTO(code.getType(), MessageFormat.format(this.bundle.getString(code.getCode()), params));
+        }
     }
 
     @Override
-    public MessageDTO getText(MessageCode code) {
-        return getText(code, new Object[0]);
-    }
+    public abstract MessageDTO getText(KoppException koppException);
 
     @Override
-    public MessageDTO getText(MessageCode code, Object... params) {
-        return getText(this.bundle, code.getType(), code.getCode(), params);
-    }
+    public abstract MessageDTO getText(MessageCode code);
 
-    protected MessageDTO getText(ResourceBundle bundle, String type, String code, Object... params) {
-        return new MessageDTO(type, MessageFormat.format(bundle.getString(code), params));
-    }
+    @Override
+    public abstract MessageDTO getText(MessageCode code, Object... params);
 
 }

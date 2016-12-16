@@ -2,14 +2,16 @@ package br.com.kopp.sistrak.skepi.servicos.ejb;
 
 import br.com.kopp.framework.message.code.KoppCode;
 import br.com.kopp.framework.ejb.KoppEJB;
+import br.com.kopp.sistrak.skepi.persistence.mybatis.dao.UsuarioMapper;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
-import br.com.kopp.sistrak.skepi.dao.UsuarioDAO;
-import br.com.kopp.sistrak.skepi.model.Usuario;
+import br.com.kopp.sistrak.skepi.persistence.mybatis.model.Usuario;
 import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
 import br.com.kopp.sistrak.skepi.exception.SkepyException;
+import br.com.kopp.sistrak.skepi.persistence.mybatis.model.UsuarioExample;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import org.mybatis.cdi.Mapper;
 
 /**
  *
@@ -19,11 +21,12 @@ import javax.inject.Inject;
 public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
 
     @Inject
-    private UsuarioDAO usuarioDAO;
+    @Mapper
+    private UsuarioMapper usuarioMapper;
 
     @Override
     public Integer count() {
-        return usuarioDAO.count();
+        return (int) usuarioMapper.countByExample(new UsuarioExample());
     }
 
     @Override
@@ -34,7 +37,7 @@ public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
             throw new SkepyException(KoppCode.VALOR_MENOR_QUE_MINIMO, minVal, id);
         }
 
-        Usuario usuario = usuarioDAO.find(id);
+        Usuario usuario = usuarioMapper.selectByPrimaryKey(id);
 
         if (usuario == null) {
             throw new SkepyException(KoppCode.VALOR_NULO);
@@ -45,7 +48,7 @@ public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
 
     @Override
     public List<UsuarioDTO> getAll() {
-        return getMapper().mapList(usuarioDAO.findAll(), UsuarioDTO.class);
+        return getMapper().mapList(usuarioMapper.selectByExample(new UsuarioExample()), UsuarioDTO.class);
     }
 
 }

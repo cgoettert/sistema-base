@@ -5,7 +5,6 @@ import br.com.kopp.framework.message.KoppMessage;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.framework.message.MessageDTO;
 import br.com.kopp.framework.message.code.MessageCode;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import javax.enterprise.context.RequestScoped;
 
@@ -21,17 +20,22 @@ public class SkepyMessage extends KoppMessage implements MessageBundle {
     private final ResourceBundle bundle;
 
     public SkepyMessage() {
-        super();
         this.bundle = ResourceBundle.getBundle(IDENT);
     }
 
     @Override
+    public MessageDTO getText(KoppException koppException) {
+        return getText(bundle, koppException.getCode(), koppException.getParams());
+    }
+
+    @Override
+    public MessageDTO getText(MessageCode code) {
+        return getText(bundle, code, new Object[0]);
+    }
+
+    @Override
     public MessageDTO getText(MessageCode code, Object... params) {
-        try {
-            return super.getText(this.bundle, code.getType(), code.getCode(), params);
-        } catch (MissingResourceException mre) {
-            return super.getText(code, params);
-        }
+        return getText(bundle, code, params);
     }
 
 }
