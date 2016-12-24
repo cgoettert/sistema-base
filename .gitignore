@@ -5,3 +5,6 @@
 /kopp-framework/target/
 /kopp-util/target/
 nb-configuration.xml
+/.settings/
+/.project
+/manifest.mf

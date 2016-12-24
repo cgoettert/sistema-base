@@ -15,24 +15,35 @@ public class FeedBuilder {
     private static final String MESSAGE_TYPE = "message";
 
     private final Map<String, Object> feeds;
+    
+    private List<MessageDTO> messages;
 
-    public FeedBuilder() {
+    private FeedBuilder() {
         this.feeds = new HashMap<>();
-        this.feeds.put(MESSAGE_TYPE, new ArrayList<>());
+        messages = new ArrayList<MessageDTO>();
     }
 
     public FeedBuilder add(Object obj) {
-        feeds.put(obj.getClass().getSimpleName(), obj);
+        return this.add(obj.getClass().getSimpleName(), obj);
+    }
+
+    /**
+     * @author lerneumann
+     */
+    public FeedBuilder add(String key, Object obj) {
+        feeds.put(key, obj);
         return this;
     }
 
     public FeedBuilder add(MessageDTO obj) {
-        List list = (ArrayList<Object[]>) feeds.get(MESSAGE_TYPE);
-        list.add(obj);
+		messages.add(obj);
         return this;
     }
 
     public Response build() {
+    	if (messages.size() > 0) {
+    		this.feeds.put(MESSAGE_TYPE, messages);
+    	}
         return Response.ok(feeds).build();
     }
     

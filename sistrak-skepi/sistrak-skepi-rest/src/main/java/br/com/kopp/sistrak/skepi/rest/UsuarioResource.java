@@ -1,22 +1,24 @@
 package br.com.kopp.sistrak.skepi.rest;
 
-import br.com.kopp.framework.message.FeedBuilder;
-import br.com.kopp.framework.exception.KoppException;
-import br.com.kopp.framework.message.MessageBundle;
-import br.com.kopp.framework.message.code.KoppCode;
-import br.com.kopp.sistrak.skepi.message.SkepyCode;
-import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
-import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 import java.util.List;
+
 import javax.ejb.EJB;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import br.com.kopp.framework.exception.KoppException;
+import br.com.kopp.framework.message.FeedBuilder;
+import br.com.kopp.framework.message.MessageBundle;
+import br.com.kopp.framework.message.code.KoppCode;
+import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
+import br.com.kopp.sistrak.skepi.message.SkepyCode;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 
 /**
  * REST Web Service
@@ -55,7 +57,7 @@ public class UsuarioResource {
                 .add(usuario)
                 .build();
     }
-
+    
     /**
      * Retrieves representation of an instance of br.com.kopp.GenericResource
      *
@@ -78,7 +80,7 @@ public class UsuarioResource {
         FeedBuilder fb = FeedBuilder.create()
                 .add(skepyMessage.getText(SkepyCode.MENSAGEM1))
                 .add(skepyMessage.getText(KoppCode.FORMATO_INVALIDO))
-                .add(usuarios);
+                .add("usuarios", usuarios);
 
         return fb.build();
     }
