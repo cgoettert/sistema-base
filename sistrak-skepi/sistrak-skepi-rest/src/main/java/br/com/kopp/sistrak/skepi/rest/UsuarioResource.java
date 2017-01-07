@@ -2,7 +2,6 @@ package br.com.kopp.sistrak.skepi.rest;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -29,33 +28,16 @@ import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 @RequestScoped
 public class UsuarioResource {
 
-    @EJB
     private UsuarioEJBLocal usuarioLocal;
-
-    @Inject
     private MessageBundle skepyMessage;
 
-    /**
-     * Retrieves representation of an instance of br.com.kopp.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("id") Integer id) {
-        UsuarioDTO usuario;
-
-        try {
-            usuario = usuarioLocal.get(id);
-        } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(skepyMessage.getText(ex))
-                    .build();
-        }
-        return FeedBuilder.create()
-                .add(usuario)
-                .build();
+    // só funciona com esse construtor
+    public UsuarioResource(){}
+    
+    @Inject
+    public UsuarioResource(UsuarioEJBLocal usuarioLocal, MessageBundle skepyMessage) {
+    	this.usuarioLocal = usuarioLocal;
+    	this.skepyMessage = skepyMessage;
     }
     
     /**
@@ -63,9 +45,9 @@ public class UsuarioResource {
      *
      * @return an instance of java.lang.String
      */
-    @GET()
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get() {
+    public Response getAll() {
 
         List<UsuarioDTO> usuarios;
 
@@ -83,6 +65,29 @@ public class UsuarioResource {
                 .add("usuarios", usuarios);
 
         return fb.build();
+    }
+    
+    /**
+     * Retrieves representation of an instance of br.com.kopp.GenericResource
+     *
+     * @return an instance of java.lang.String
+     */
+    @GET
+    @Path("{id:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById(@PathParam("id") Integer id) {
+        UsuarioDTO usuario;
+
+        try {
+            usuario = usuarioLocal.get(id);
+        } catch (KoppException ex) {
+            return FeedBuilder.create()
+                    .add(skepyMessage.getText(ex))
+                    .build();
+        }
+        return FeedBuilder.create()
+                .add(usuario)
+                .build();
     }
 
     /**
@@ -108,5 +113,4 @@ public class UsuarioResource {
                 .add(count)
                 .build();
     }
-
 }

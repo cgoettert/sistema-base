@@ -5,30 +5,18 @@
  */
 package br.com.kopp.sistrak.skepi.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  *
  * @author cgoettert
  */
+@Builder
+@Data
 public class UsuarioDTO {
     
-    private String nome;
-    private String email;
+    private final String nome;
+    private final String email;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    
 }
