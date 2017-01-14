@@ -11,6 +11,11 @@
         <groupId>br.com.kopp</groupId>
         <version>1.0</version>
     </parent>
+    
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
     <modules>
         <module>sistrak-skepi-ear</module>

@@ -5,10 +5,12 @@ import br.com.kopp.framework.ejb.KoppEJB;
 import br.com.kopp.sistrak.skepi.persistence.mybatis.dao.UsuarioMapper;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
 import br.com.kopp.sistrak.skepi.persistence.mybatis.model.Usuario;
+import br.com.kopp.sistrak.skepi.conversores.FabricaConversoresDto;
 import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
 import br.com.kopp.sistrak.skepi.exception.SkepyException;
 import br.com.kopp.sistrak.skepi.persistence.mybatis.model.UsuarioExample;
 import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import org.mybatis.cdi.Mapper;
@@ -42,13 +44,21 @@ public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
         if (usuario == null) {
             throw new SkepyException(KoppCode.VALOR_NULO);
         }
-
-        return getMapper().map(usuario, UsuarioDTO.class);
+        
+//        return getMapper().map(usuario, UsuarioDTO.class, null);
+        return getMapper().map(
+                usuario, 
+                UsuarioDTO.class, 
+                FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO());
     }
 
     @Override
     public List<UsuarioDTO> getAll() {
-        return getMapper().mapList(usuarioMapper.selectByExample(new UsuarioExample()), UsuarioDTO.class);
+//        return getMapper().mapList(usuarioMapper.selectByExample(new UsuarioExample()), UsuarioDTO.class, null);
+        return getMapper().mapList(
+                usuarioMapper.selectByExample(new UsuarioExample()), 
+                UsuarioDTO.class, 
+                FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO());
     }
 
 }

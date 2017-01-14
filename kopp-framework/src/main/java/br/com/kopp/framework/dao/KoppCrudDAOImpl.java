@@ -8,8 +8,15 @@ import java.util.List;
  */
 public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudDAO<T> {
 
+
+    private final Class<T> entityClass;
+    
     public KoppCrudDAOImpl(Class<T> entityClass) {
-        super(entityClass);
+        this.entityClass = entityClass;
+    }
+    
+    protected Class<T> getEntityClass() {
+        return this.entityClass;
     }
 
     @Override

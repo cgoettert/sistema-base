@@ -12,18 +12,8 @@ public abstract class KoppDAO<T> {
     @PersistenceContext
     private EntityManager em;
 
-    private final Class<T> entityClass;
-
-    public KoppDAO(Class<T> entityClass) {
-        this.entityClass = entityClass;
-    }
-
     protected EntityManager getEntityManager() {
         return this.em;
-    }
-    
-    protected Class<T> getEntityClass() {
-        return this.entityClass;
     }
 
 }
