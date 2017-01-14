@@ -45,20 +45,16 @@ public class UsuarioEJB extends KoppEJB implements UsuarioEJBLocal {
             throw new SkepyException(KoppCode.VALOR_NULO);
         }
         
-//        return getMapper().map(usuario, UsuarioDTO.class, null);
-        return getMapper().map(
-                usuario, 
-                UsuarioDTO.class, 
-                FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO());
+        return getMapper()
+                .comFunction(FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO())
+                .converterObjeto(usuario);
     }
 
     @Override
     public List<UsuarioDTO> getAll() {
-//        return getMapper().mapList(usuarioMapper.selectByExample(new UsuarioExample()), UsuarioDTO.class, null);
-        return getMapper().mapList(
-                usuarioMapper.selectByExample(new UsuarioExample()), 
-                UsuarioDTO.class, 
-                FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO());
+        return getMapper()
+                .comFunction(FabricaConversoresDto.obterConversorUsuarioParaUsuarioDTO())
+                .converterLista(usuarioMapper.selectByExample(new UsuarioExample()));
     }
 
 }

@@ -2,8 +2,7 @@ package br.com.kopp.framework.ejb;
 
 import javax.inject.Inject;
 
-import br.com.kopp.framework.mapper.FunctionMapper;
-import br.com.kopp.framework.mapper.KoppMapper;
+import br.com.kopp.framework.mapper.IKoppMapper;
 
 /**
  *
@@ -12,10 +11,9 @@ import br.com.kopp.framework.mapper.KoppMapper;
 public abstract class KoppEJB {
     
     @Inject
-    @FunctionMapper
-    private KoppMapper mapper;
+    private IKoppMapper mapper;
     
-    protected KoppMapper getMapper() {
+    protected IKoppMapper getMapper() {
         return this.mapper;
     }
     

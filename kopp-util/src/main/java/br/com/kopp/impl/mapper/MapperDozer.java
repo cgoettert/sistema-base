@@ -1,12 +1,10 @@
 package br.com.kopp.impl.mapper;
 
-import br.com.kopp.framework.mapper.KoppMapper;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 import javax.enterprise.context.RequestScoped;
+
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
@@ -15,15 +13,13 @@ import org.dozer.Mapper;
  * @author cgoettert
  */
 @RequestScoped
-public class MapperDozer implements KoppMapper {
+public class MapperDozer {
 
-    @Override
-    public <T, U> U map(final T source, final Class<U> destinationClass, Function<T, U> fun) {
+    public <T, U> U map(final T source, final Class<U> destinationClass) {
         return new DozerBeanMapper().map(source, destinationClass);
     }
 
-    @Override
-    public <T, U> ArrayList<U> mapList(final List<T> source, final Class<U> destType, Function<T, U> fun) {
+    public <T, U> ArrayList<U> mapList(final List<T> source, final Class<U> destType) {
         final Mapper mapper = new DozerBeanMapper();
         final ArrayList<U> dest = new ArrayList<>();
 
