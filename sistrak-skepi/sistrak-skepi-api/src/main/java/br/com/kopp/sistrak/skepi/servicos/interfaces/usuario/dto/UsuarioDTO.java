@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.kopp.sistrak.skepi.dto;
+package br.com.kopp.sistrak.skepi.servicos.interfaces.usuario.dto;
 
 import lombok.Builder;
 import lombok.Data;

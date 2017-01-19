@@ -1,4 +1,4 @@
-package br.com.kopp.sistrak.skepi.rest;
+package br.com.kopp.sistrak.skepi.rest.resources;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.framework.message.code.KoppCode;
-import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.usuario.dto.UsuarioDTO;
 import br.com.kopp.sistrak.skepi.message.SkepyCode;
-import br.com.kopp.sistrak.skepi.servicos.interfaces.UsuarioEJBLocal;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.usuario.UsuarioEJBLocal;
 
 /**
  * REST Web Service

@@ -1,6 +1,6 @@
-package br.com.kopp.sistrak.skepi.servicos.interfaces;
+package br.com.kopp.sistrak.skepi.servicos.interfaces.usuario;
 
-import br.com.kopp.sistrak.skepi.dto.UsuarioDTO;
+import br.com.kopp.sistrak.skepi.servicos.interfaces.usuario.dto.UsuarioDTO;
 import br.com.kopp.sistrak.skepi.exception.SkepyException;
 import java.util.List;
 import javax.ejb.Local;

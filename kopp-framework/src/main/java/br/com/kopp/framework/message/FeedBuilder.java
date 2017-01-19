@@ -15,7 +15,7 @@ public class FeedBuilder {
     private static final String MESSAGE_TYPE = "message";
 
     private final Map<String, Object> feeds;
-    
+
     private List<MessageDTO> messages;
 
     private FeedBuilder() {
@@ -36,17 +36,17 @@ public class FeedBuilder {
     }
 
     public FeedBuilder add(MessageDTO obj) {
-		messages.add(obj);
+        messages.add(obj);
         return this;
     }
 
     public Response build() {
-    	if (messages.size() > 0) {
-    		this.feeds.put(MESSAGE_TYPE, messages);
-    	}
+        if (messages.size() > 0) {
+            this.feeds.put(MESSAGE_TYPE, messages);
+        }
         return Response.ok(feeds).build();
     }
-    
+
     public static FeedBuilder create() {
         return new FeedBuilder();
     }

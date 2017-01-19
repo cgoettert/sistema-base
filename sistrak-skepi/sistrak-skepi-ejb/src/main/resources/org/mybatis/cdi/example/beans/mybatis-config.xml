@@ -5,7 +5,7 @@
     <environments default="wildfly">
         <environment id="wildfly">
             <transactionManager type="JDBC"/>
-            <dataSource type="JNDI">
+            <dataSource type="JNDI" >
                 <property name="data_source" value="java:/SistrakDS"/>
                 <!-- data source should be defined in tomee.xml as follows:
                     <Resource id="DummyDS" type="DataSource">
@@ -22,5 +22,7 @@
         <!--<package name="org.mybatis.builder"/>-->
         <mapper resource="br/com/kopp/sistrak/skepi/xml/TransacaoMapper.xml"/>
         <mapper resource="br/com/kopp/sistrak/skepi/xml/UsuarioMapper.xml"/>
+        <mapper resource="br/com/kopp/sistrak/skepi/xml/UsuarioOrigemMapper.xml"/>
+        <mapper resource="br/com/kopp/sistrak/skepi/xml/UsuarioDepartamentoMapper.xml"/>
     </mappers>
 </configuration>

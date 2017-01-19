@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.kopp.sistrak.skepi.rest;
+package br.com.kopp.sistrak.skepi.rest.config;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,8 +29,10 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(br.com.kopp.sistrak.skepi.rest.CrossOriginResourceSharingFilter.class);
-        resources.add(br.com.kopp.sistrak.skepi.rest.UsuarioResource.class);
+        resources.add(br.com.kopp.sistrak.skepi.rest.config.CrossOriginResourceSharingFilter.class);
+        resources.add(br.com.kopp.sistrak.skepi.rest.resources.DepartamentoResource.class);
+        resources.add(br.com.kopp.sistrak.skepi.rest.resources.OrigemResource.class);
+        resources.add(br.com.kopp.sistrak.skepi.rest.resources.UsuarioResource.class);
     }
     
 }
