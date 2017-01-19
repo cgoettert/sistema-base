@@ -14,8 +14,6 @@ import javax.ws.rs.core.Response;
 import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
-import br.com.kopp.framework.message.code.KoppCode;
-import br.com.kopp.sistrak.skepi.message.SkepyCode;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.departamento.UsuarioDepartamentoLocal;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.departamento.dto.UsuarioDepartamentoCommand;
 import br.com.kopp.sistrak.skepi.servicos.interfaces.departamento.dto.UsuarioDepartamentoDTO;
@@ -91,6 +89,7 @@ public class DepartamentoResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(UsuarioDepartamentoCommand command) {
 
         UsuarioDepartamentoDTO input = UsuarioDepartamentoDTO.builder()
@@ -110,8 +109,15 @@ public class DepartamentoResource {
     }
 
     @PUT
+    @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(UsuarioDepartamentoDTO input) {
+    public Response update(@PathParam("id") Integer id, UsuarioDepartamentoCommand command) {
+
+        UsuarioDepartamentoDTO input = UsuarioDepartamentoDTO.builder()
+                .id(id)
+                .descricao(command.getDescricao())
+                .origem(command.getOrigem())
+                .build();
 
         try {
             ejb.update(input);

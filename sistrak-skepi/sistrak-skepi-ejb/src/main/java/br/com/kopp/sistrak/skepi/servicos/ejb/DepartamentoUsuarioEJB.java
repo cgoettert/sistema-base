@@ -11,6 +11,8 @@ import br.com.kopp.sistrak.skepi.servicos.interfaces.departamento.dto.UsuarioDep
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import org.mybatis.cdi.Mapper;
 import org.mybatis.cdi.Transactional;
@@ -20,6 +22,7 @@ import org.mybatis.cdi.Transactional;
  * @author cgoettert
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.BEAN) 
 public class DepartamentoUsuarioEJB extends KoppEJB implements UsuarioDepartamentoLocal {
 
     @Inject
