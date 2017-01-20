@@ -21,7 +21,7 @@ public class SqlSessionFactoryProviderImpl implements SqlSessionFactoryProvider 
     @ApplicationScoped
     @Override
     public SqlSessionFactory produceFactory() throws IOException {
-        String resource = "org/mybatis/cdi/example/beans/mybatis-config.xml";
+        String resource = "org/mybatis/config/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         return sqlSessionFactory;

@@ -29,10 +29,6 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(br.com.kopp.sistrak.skepi.rest.config.CrossOriginResourceSharingFilter.class);
-        resources.add(br.com.kopp.sistrak.skepi.rest.resources.DepartamentoResource.class);
-        resources.add(br.com.kopp.sistrak.skepi.rest.resources.OrigemResource.class);
-        resources.add(br.com.kopp.sistrak.skepi.rest.resources.UsuarioResource.class);
     }
     
 }
