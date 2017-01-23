@@ -8,3 +8,7 @@ nb-configuration.xml
 /.settings/
 /.project
 /manifest.mf
+/sistrak-base/sistrak-base-api/target/
+/sistrak-base/sistrak-base-ejb/target/
+/sistrak-base/sistrak-base-rest/target/
+/sistrak-base/sistrak-base-ear/target/
