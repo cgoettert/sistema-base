@@ -8,11 +8,11 @@ import java.util.function.Function;
  *
  * @author Leandro
  */
-final class UsuarioOrigemConversor {
+final class OrigemConversor {
     
-    public static Function<UsuarioOrigem, OrigemUsuarioDto> obterConversorUsuarioOrigem() {
+    public static Function<Origem, OrigemDto> obterConversorUsuarioOrigem() {
 
-        return (source) -> OrigemUsuarioDto.builder()
+        return (source) -> OrigemDto.builder()
                 .id(source.getId())
                 .descricao(source.getDescricao())
                 .build();

@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
-import br.com.kopp.sistrak.base.servicos.origem.OrigemUsuarioDto;
+import br.com.kopp.sistrak.base.servicos.origem.OrigemDto;
 import br.com.kopp.sistrak.base.servicos.origem.OrigemServicoLocal;
 
 /**
@@ -48,7 +48,7 @@ public class OrigemController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response combo() {
 
-        List<OrigemUsuarioDto> list;
+        List<OrigemDto> list;
 
         try {
             list = ejb.combo();

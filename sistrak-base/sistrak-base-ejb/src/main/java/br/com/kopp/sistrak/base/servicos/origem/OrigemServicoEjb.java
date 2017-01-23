@@ -15,14 +15,14 @@ import javax.inject.Inject;
 public class OrigemServicoEjb extends KoppEJB implements OrigemServicoLocal {
 
     @Inject
-    private UsuarioOrigemDao usuarioOrigemDao;
+    private OrigemDao usuarioOrigemDao;
     
     @Override
-    public List<OrigemUsuarioDto> combo() throws SkepyException {
-        List<UsuarioOrigem> lista = usuarioOrigemDao.findAll();
+    public List<OrigemDto> combo() throws SkepyException {
+        List<Origem> lista = usuarioOrigemDao.findAll();
         
         return getMapper()
-                .comFunction(UsuarioOrigemConversor.obterConversorUsuarioOrigem())
+                .comFunction(OrigemConversor.obterConversorUsuarioOrigem())
                 .converterLista(lista);
     }
 

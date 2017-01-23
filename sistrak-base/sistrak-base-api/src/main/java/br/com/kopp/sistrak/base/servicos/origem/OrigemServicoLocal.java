@@ -11,6 +11,6 @@ import javax.ejb.Local;
 @Local
 public interface OrigemServicoLocal {
 
-    public List<OrigemUsuarioDto> combo() throws SkepyException;;
+    public List<OrigemDto> combo() throws SkepyException;;
     
 }

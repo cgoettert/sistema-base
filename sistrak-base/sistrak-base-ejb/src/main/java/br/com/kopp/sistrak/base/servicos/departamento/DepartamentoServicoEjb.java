@@ -16,23 +16,23 @@ import javax.transaction.Transactional;
 public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServicoLocal {
     
     @Inject
-    private UsuarioDepartamentoDao usuarioDepartamentoDao;
+    private DepartamentoDao usuarioDepartamentoDao;
     
     @Override
     public List<DepartamentoDto> getAll() throws SkepyException {
-        List<UsuarioDepartamento> lista = usuarioDepartamentoDao.findAll();
+        List<Departamento> lista = usuarioDepartamentoDao.findAll();
         
         return getMapper()
-                .comFunction(UsuarioDepartamentoConversor.obterConversorUsuarioDepartamento())
+                .comFunction(DepartamentoConversor.obterConversorUsuarioDepartamento())
                 .converterLista(lista);
     }
     
     @Override
     public DepartamentoDto get(Integer obj) throws SkepyException {
-        UsuarioDepartamento entity = usuarioDepartamentoDao.find(obj);
+        Departamento entity = usuarioDepartamentoDao.find(obj);
         
         return getMapper()
-                .comFunction(UsuarioDepartamentoConversor.obterConversorUsuarioDepartamento())
+                .comFunction(DepartamentoConversor.obterConversorUsuarioDepartamento())
                 .converterObjeto(entity);
     }
     
@@ -40,7 +40,7 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     @Transactional
     public void create(DepartamentoDto dto) throws SkepyException {
         
-        UsuarioDepartamento record = new UsuarioDepartamento();
+        Departamento record = new Departamento();
         record.setId(dto.getOrigem());
         record.setDescricao(dto.getDescricao());
         
@@ -49,7 +49,7 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     
     @Override
     public void update(DepartamentoDto dto) throws SkepyException {
-        UsuarioDepartamento record = new UsuarioDepartamento();
+        Departamento record = new Departamento();
         record.setId(dto.getId());
         record.setId(dto.getOrigem());
         record.setDescricao(dto.getDescricao());
@@ -59,7 +59,7 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     
     @Override
     public void delete(Integer obj) throws SkepyException {
-        usuarioDepartamentoDao.remove(new UsuarioDepartamento(obj));
+        usuarioDepartamentoDao.remove(new Departamento(obj));
     }
 
 }

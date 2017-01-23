@@ -8,9 +8,9 @@ import java.util.function.Function;
  *
  * @author Leandro
  */
-final class UsuarioDepartamentoConversor {
+final class DepartamentoConversor {
     
-    public static Function<UsuarioDepartamento, DepartamentoDto> obterConversorUsuarioDepartamento() {
+    public static Function<Departamento, DepartamentoDto> obterConversorUsuarioDepartamento() {
 
         return (source) -> DepartamentoDto.builder()
                 .id(source.getId())

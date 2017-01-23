@@ -6,6 +6,6 @@ import br.com.kopp.framework.dao.KoppCrudDAO;
  *
  * @author cgoettert
  */
-interface UsuarioOrigemDao extends KoppCrudDAO<UsuarioOrigem> {
+interface OrigemDao extends KoppCrudDAO<Origem> {
 
 }

@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.kopp.sistrak.base.servicos.departamento;
+package br.com.kopp.sistrak.base.servicos.origem;
 
-import br.com.kopp.sistrak.base.servicos.origem.UsuarioOrigem;
+import br.com.kopp.sistrak.base.servicos.departamento.Departamento;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -25,10 +23,8 @@ import javax.validation.constraints.Size;
  * @author cgoettert
  */
 @Entity
-@Table(name = "usuario_departamento")
-@NamedQueries({
-    @NamedQuery(name = "UsuarioDepartamento.findAll", query = "SELECT u FROM UsuarioDepartamento u")})
-public class UsuarioDepartamento implements Serializable {
+@Table(name = "usuario_origem")
+public class Origem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,14 +35,13 @@ public class UsuarioDepartamento implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "descricao")
     private String descricao;
-    @JoinColumn(name = "id_usuario_origem", referencedColumnName = "id")
-    @ManyToOne
-    private UsuarioOrigem usuarioOrigem;
+    @OneToMany(mappedBy = "usuarioOrigem")
+    private List<Departamento> usuarioDepartamentoList;
 
-    public UsuarioDepartamento() {
+    public Origem() {
     }
 
-    public UsuarioDepartamento(Integer id) {
+    public Origem(Integer id) {
         this.id = id;
     }
 
@@ -66,12 +61,12 @@ public class UsuarioDepartamento implements Serializable {
         this.descricao = descricao;
     }
 
-    public UsuarioOrigem getUsuarioOrigem() {
-        return usuarioOrigem;
+    public List<Departamento> getUsuarioDepartamentoList() {
+        return usuarioDepartamentoList;
     }
 
-    public void setUsuarioOrigem(UsuarioOrigem usuarioOrigem) {
-        this.usuarioOrigem = usuarioOrigem;
+    public void setUsuarioDepartamentoList(List<Departamento> usuarioDepartamentoList) {
+        this.usuarioDepartamentoList = usuarioDepartamentoList;
     }
 
     @Override
@@ -84,10 +79,10 @@ public class UsuarioDepartamento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsuarioDepartamento)) {
+        if (!(object instanceof Origem)) {
             return false;
         }
-        UsuarioDepartamento other = (UsuarioDepartamento) object;
+        Origem other = (Origem) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -96,7 +91,7 @@ public class UsuarioDepartamento implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.kopp.sistrak.base.UsuarioDepartamento[ id=" + id + " ]";
+        return "br.com.kopp.sistrak.base.UsuarioOrigem[ id=" + id + " ]";
     }
     
 }
