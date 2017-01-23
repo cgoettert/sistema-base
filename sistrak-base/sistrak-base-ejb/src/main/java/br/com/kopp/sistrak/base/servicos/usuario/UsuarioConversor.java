@@ -1,6 +1,5 @@
 package br.com.kopp.sistrak.base.servicos.usuario;
 
-import br.com.kopp.sistrak.base.servicos.usuario.UsuarioDto;
 import java.util.function.Function;
 
 

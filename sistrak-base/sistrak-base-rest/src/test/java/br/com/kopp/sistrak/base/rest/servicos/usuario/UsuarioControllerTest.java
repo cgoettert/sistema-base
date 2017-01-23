@@ -46,7 +46,7 @@ public class UsuarioControllerTest extends JerseyTest {
         doReturn(list).when(usuarioLocal).getAll();
 
         // when
-        Response response = target("usuario/").request().get(Response.class);
+        Response response = target("basico/administracao/usuario/").request().get(Response.class);
 
         // then
         list = getFromResponse(response, "usuarios");
@@ -59,7 +59,7 @@ public class UsuarioControllerTest extends JerseyTest {
         doReturn(gerarUsuarioDto()).when(usuarioLocal).get(anyInt());
 
         // when
-        Response response = target("usuario/10").request().get(Response.class);
+        Response response = target("basico/administracao/usuario/10").request().get(Response.class);
 
         // then
         Map<String, Object> map = getFromResponse(response, "UsuarioDto");

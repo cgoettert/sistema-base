@@ -1,6 +1,5 @@
 package br.com.kopp.sistrak.base.servicos.departamento;
 
-import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoDto;
 import java.util.function.Function;
 
 
@@ -16,7 +15,7 @@ final class UsuarioDepartamentoConversor {
         return (source) -> DepartamentoDto.builder()
                 .id(source.getId())
                 .descricao(source.getDescricao())
-                .origem(source.getIdUsuarioOrigem())
+                .origem(source.getId())
                 .build();
     }
 }

@@ -1,6 +1,5 @@
 package br.com.kopp.sistrak.base.servicos.origem;
 
-import br.com.kopp.sistrak.base.servicos.origem.OrigemUsuarioDto;
 import java.util.function.Function;
 
 

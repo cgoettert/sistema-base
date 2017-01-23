@@ -1,14 +1,11 @@
 package br.com.kopp.sistrak.base.servicos.origem;
 
-import br.com.kopp.sistrak.base.servicos.origem.OrigemServicoLocal;
-import br.com.kopp.sistrak.base.servicos.origem.OrigemUsuarioDto;
 import br.com.kopp.framework.ejb.KoppEJB;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import org.mybatis.cdi.Mapper;
 
 /**
  *
@@ -18,12 +15,11 @@ import org.mybatis.cdi.Mapper;
 public class OrigemServicoEjb extends KoppEJB implements OrigemServicoLocal {
 
     @Inject
-    @Mapper
-    private UsuarioOrigemMapper mapper;
+    private UsuarioOrigemDao usuarioOrigemDao;
     
     @Override
     public List<OrigemUsuarioDto> combo() throws SkepyException {
-        List<UsuarioOrigem> lista = mapper.selectByExample(new UsuarioOrigemExample());
+        List<UsuarioOrigem> lista = usuarioOrigemDao.findAll();
         
         return getMapper()
                 .comFunction(UsuarioOrigemConversor.obterConversorUsuarioOrigem())
