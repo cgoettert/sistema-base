@@ -1,4 +1,4 @@
-package br.com.kopp.impl.mapper;
+package br.com.kopp.framework.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class MapperDozer {
         }
 
         // finally remove all null values if any
-        List<T> s1 = new ArrayList<T>();
+        List<T> s1 = new ArrayList<>();
         s1.add(null);
         dest.removeAll(s1);
 

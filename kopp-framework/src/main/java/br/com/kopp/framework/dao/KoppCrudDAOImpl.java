@@ -1,6 +1,7 @@
 package br.com.kopp.framework.dao;
 
 import br.com.kopp.framework.datatables.RequestData;
+import br.com.kopp.framework.datatables.ResponseData;
 import java.util.List;
 
 /**
@@ -10,11 +11,11 @@ import java.util.List;
 public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudDAO<T> {
 
     private final Class<T> entityClass;
-    
+
     public KoppCrudDAOImpl(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-    
+
     protected Class<T> getEntityClass() {
         return this.entityClass;
     }
@@ -40,14 +41,23 @@ public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudD
     }
 
     @Override
+    public ResponseData mountTable(RequestData requestData) {
+        Long recordsTotal = this.count();
+        Long recordsFiltered = this.countRange(requestData);
+        List<T> listaBanco = this.findRange(requestData);
+
+        return new ResponseData(requestData.getDraw(), recordsTotal, recordsFiltered, listaBanco);
+    }
+
+    @Override
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(getEntityClass()));
         return getEntityManager().createQuery(cq).getResultList();
     }
 
-    @Override
-    public List<T> findRange(RequestData requestData) {
+    private List<T> findRange(RequestData requestData) {
+        // TODO add filters e orderBy
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(getEntityClass()));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
@@ -56,13 +66,21 @@ public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudD
         return q.getResultList();
     }
 
-    @Override
-    public int count() {
+    private Long countRange(RequestData requestData) {
+        // TODO add filters e orderBy
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         javax.persistence.criteria.Root<T> rt = cq.from(getEntityClass());
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        return ((Long) q.getSingleResult()).intValue();
+        return (Long) q.getSingleResult();
+    }
+
+    private Long count() {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.Root<T> rt = cq.from(getEntityClass());
+        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        return (Long) q.getSingleResult();
     }
 
 }

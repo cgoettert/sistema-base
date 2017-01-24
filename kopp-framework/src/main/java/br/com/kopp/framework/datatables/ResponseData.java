@@ -8,17 +8,17 @@ import java.util.List;
  * @author cgoettert
  * @param <T>
  */
-public class ResponseData<T> implements Serializable {
+public class ResponseData implements Serializable {
 
     private Integer draw;
-    private Integer recordsTotal;
-    private Integer recordsFiltered;
+    private Long recordsTotal;
+    private Long recordsFiltered;
     private List data;
 
     public ResponseData() {
     }
 
-    public ResponseData(Integer draw, Integer recordsTotal, Integer recordsFiltered, List data) {
+    public ResponseData(Integer draw, Long recordsTotal, Long recordsFiltered, List data) {
         this.draw = draw;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;
@@ -33,19 +33,19 @@ public class ResponseData<T> implements Serializable {
         this.draw = draw;
     }
 
-    public Integer getRecordsTotal() {
+    public Long getRecordsTotal() {
         return recordsTotal;
     }
 
-    public void setRecordsTotal(Integer recordsTotal) {
+    public void setRecordsTotal(Long recordsTotal) {
         this.recordsTotal = recordsTotal;
     }
 
-    public Integer getRecordsFiltered() {
+    public Long getRecordsFiltered() {
         return recordsFiltered;
     }
 
-    public void setRecordsFiltered(Integer recordsFiltered) {
+    public void setRecordsFiltered(Long recordsFiltered) {
         this.recordsFiltered = recordsFiltered;
     }
 

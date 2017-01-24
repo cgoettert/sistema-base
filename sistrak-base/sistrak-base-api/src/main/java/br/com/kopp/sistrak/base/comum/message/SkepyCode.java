@@ -9,8 +9,9 @@ import br.com.kopp.framework.message.code.MessageCode;
 public enum SkepyCode implements MessageCode {
 
     MS0001("success"),
-    MS0002("error"),
-    MS0003("error");
+    MS0002("success"),
+    MS0003("success"),
+    MS0004("success");
 
     private final String type;
 

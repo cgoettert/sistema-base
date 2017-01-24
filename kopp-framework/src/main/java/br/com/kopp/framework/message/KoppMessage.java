@@ -19,12 +19,16 @@ public abstract class KoppMessage implements MessageBundle {
     public KoppMessage() {
         this.bundle = ResourceBundle.getBundle(IDENT);
     }
-    
+
     protected MessageDTO getText(ResourceBundle bundle, MessageCode code, Object... params) {
         try {
             return new MessageDTO(code.getType(), MessageFormat.format(bundle.getString(code.getCode()), params));
         } catch (MissingResourceException mre) {
-            return new MessageDTO(code.getType(), MessageFormat.format(this.bundle.getString(code.getCode()), params));
+            try {
+                return new MessageDTO(code.getType(), MessageFormat.format(this.bundle.getString(code.getCode()), params));
+            } catch (MissingResourceException mree) {
+                return new MessageDTO(code.getType(), code.getCode());
+            }
         }
     }
 

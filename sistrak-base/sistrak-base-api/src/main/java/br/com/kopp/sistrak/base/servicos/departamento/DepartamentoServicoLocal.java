@@ -1,8 +1,8 @@
 package br.com.kopp.sistrak.base.servicos.departamento;
 
 import br.com.kopp.framework.datatables.RequestData;
+import br.com.kopp.framework.datatables.ResponseData;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
-import java.util.List;
 
 /**
  *
@@ -10,9 +10,7 @@ import java.util.List;
  */
 public interface DepartamentoServicoLocal {
 
-    public List<DepartamentoListagemDto> getRange(RequestData requestData) throws SkepyException;
-
-    public Integer count() throws SkepyException;
+    public ResponseData montarTabela(RequestData requestData) throws SkepyException;
 
     public DepartamentoDto get(Integer obj) throws SkepyException;
 

@@ -15,6 +15,6 @@ import lombok.Data;
 class DepartamentoCommand {
     
     private String descricao;
-    private Integer origem;
+    private Integer usuarioOrigem;
     
 }

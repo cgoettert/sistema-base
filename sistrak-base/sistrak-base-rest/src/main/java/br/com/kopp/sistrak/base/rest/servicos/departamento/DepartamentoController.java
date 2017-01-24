@@ -1,7 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.departamento;
 
 import br.com.kopp.framework.datatables.RequestData;
-import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -15,8 +14,8 @@ import javax.ws.rs.core.Response;
 import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
+import br.com.kopp.sistrak.base.comum.message.SkepyCode;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoDto;
-import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoListagemDto;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -48,17 +47,12 @@ public class DepartamentoController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(@QueryParam("request") RequestData request) {
+    public Response get(@QueryParam("request") RequestData request) {
 
         FeedBuilder fb = FeedBuilder.create();
-        List<DepartamentoListagemDto> departamentos;
-        Integer recordsTotal;
 
         try {
-            departamentos = servico.getRange(request);
-            recordsTotal = servico.count();
-
-            fb.add(request.getDraw(), recordsTotal, departamentos.size(), departamentos);
+            fb.add(servico.montarTabela(request));
         } catch (KoppException ex) {
             fb.add(message.getText(ex));
         }
@@ -66,70 +60,63 @@ public class DepartamentoController {
         return fb.build();
     }
 
-    /**
-     * Retrieves representation of an instance of br.com.kopp.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
     @GET
     @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
-        DepartamentoDto obj;
+
+        FeedBuilder fb = FeedBuilder.create();
 
         try {
-            obj = servico.get(id);
+            DepartamentoDto obj = servico.get(id);
+            fb.add(obj);
         } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
+            fb.add(message.getText(ex));
         }
-        return FeedBuilder.create()
-                .add(obj)
-                .build();
+
+        return fb.build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(DepartamentoCommand command) {
+    public Response post(DepartamentoCommand command) {
+
+        FeedBuilder fb = FeedBuilder.create();
 
         DepartamentoDto input = DepartamentoDto.builder()
                 .descricao(command.getDescricao())
-                .origem(command.getOrigem())
+                .origem(command.getUsuarioOrigem())
                 .build();
 
         try {
             servico.create(input);
+            fb.add(message.getText(SkepyCode.MS0002));
         } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
+            fb.add(message.getText(ex));
         }
 
-        return FeedBuilder.create().build();
+        return fb.build();
     }
 
     @PUT
     @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Integer id, DepartamentoCommand command) {
+    public Response put(@PathParam("id") Integer id, DepartamentoCommand command) {
+
+        FeedBuilder fb = FeedBuilder.create();
 
         DepartamentoDto input = DepartamentoDto.builder()
-                .id(id)
-                .descricao(command.getDescricao())
-                .origem(command.getOrigem())
                 .build();
 
         try {
             servico.update(input);
+            fb.add(message.getText(SkepyCode.MS0003));
         } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
+            fb.add(message.getText(ex));
         }
 
-        return FeedBuilder.create().build();
+        return fb.build();
     }
 
     @DELETE
@@ -137,14 +124,15 @@ public class DepartamentoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Integer id) {
 
+        FeedBuilder fb = FeedBuilder.create();
+
         try {
             servico.delete(id);
+            fb.add(message.getText(SkepyCode.MS0004));
         } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
+            fb.add(message.getText(ex));
         }
 
-        return FeedBuilder.create().build();
+        return fb.build();
     }
 }

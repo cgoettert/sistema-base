@@ -1,4 +1,4 @@
-package br.com.kopp.impl.mapper;
+package br.com.kopp.framework.mapper;
 
 import java.util.ArrayList;
 import java.util.List;

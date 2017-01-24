@@ -16,14 +16,16 @@ public class FeedBuilder {
 
     private static final String MESSAGE_TYPE = "message";
     private static final String DATA_TYPE = "data";
+    private static final String STATUS_TYPE = "status";
 
+    private String status;
     private final Map<String, Object> feeds;
-
     private final Collection<MessageDTO> messages;
 
     private FeedBuilder() {
         feeds = new HashMap<>();
         messages = new ArrayList<>();
+        status = "true";
     }
 
     public FeedBuilder add(String key, Object obj) {
@@ -35,11 +37,14 @@ public class FeedBuilder {
         return this.add(obj.getClass().getSimpleName(), obj);
     }
 
-    public FeedBuilder add(Integer draw, Integer recordsTotal, int size, List data) {
-        return this.add("datatables", new ResponseData<>(draw, recordsTotal, data.size(), data));
+    public FeedBuilder add(ResponseData responseData) {
+        return this.add("datatables", responseData);
     }
 
     public FeedBuilder add(MessageDTO obj) {
+        if("error".equals(obj.getTipo())) {
+            status = "false";
+        }
         messages.add(obj);
         return this;
     }
@@ -48,6 +53,7 @@ public class FeedBuilder {
         Map<String, Object> build = new HashMap<>();
         build.put(DATA_TYPE, feeds);
         build.put(MESSAGE_TYPE, messages);
+        build.put(STATUS_TYPE, status);
 
         return Response.ok(build).build();
     }

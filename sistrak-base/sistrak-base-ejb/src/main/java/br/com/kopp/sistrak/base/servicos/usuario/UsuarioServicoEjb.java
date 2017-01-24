@@ -1,10 +1,10 @@
 package br.com.kopp.sistrak.base.servicos.usuario;
 
 import br.com.kopp.framework.datatables.RequestData;
+import br.com.kopp.framework.datatables.ResponseData;
 import br.com.kopp.framework.message.code.KoppCode;
 import br.com.kopp.framework.ejb.KoppEJB;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,8 +20,15 @@ public class UsuarioServicoEjb extends KoppEJB implements UsuarioServicoLocal {
     private UsuarioDao usuarioDao;
 
     @Override
-    public Integer count() {
-        return (int) usuarioDao.count();
+    public ResponseData montarTabela(RequestData requestData) throws SkepyException {
+
+        ResponseData responseData = usuarioDao.mountTable(requestData);
+
+        responseData.setData(getMapper()
+                .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
+                .converterLista(responseData.getData()));
+
+        return responseData;
     }
 
     @Override
@@ -41,13 +48,6 @@ public class UsuarioServicoEjb extends KoppEJB implements UsuarioServicoLocal {
         return getMapper()
                 .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
                 .converterObjeto(usuario);
-    }
-
-    @Override
-    public List<UsuarioDto> getRange(RequestData requestData) throws SkepyException {
-        return getMapper()
-                .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
-                .converterLista(usuarioDao.findRange(requestData));
     }
 
 }

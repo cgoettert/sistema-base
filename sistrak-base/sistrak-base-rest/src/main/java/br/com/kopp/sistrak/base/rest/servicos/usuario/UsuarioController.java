@@ -41,24 +41,14 @@ public class UsuarioController {
         this.message = message;
     }
 
-    /**
-     * Retrieves representation of an instance of br.com.kopp.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@QueryParam("request") RequestData request) {
 
         FeedBuilder fb = FeedBuilder.create();
-        List<UsuarioDto> usuarios;
-        Integer recordsTotal;
 
         try {
-            usuarios = usuarioLocal.getRange(request);
-            recordsTotal = usuarioLocal.count();
-
-            fb.add(request.getDraw(), recordsTotal, usuarios.size(), usuarios);
+            fb.add(usuarioLocal.montarTabela(request));
         } catch (KoppException ex) {
             fb.add(message.getText(ex));
         }
@@ -66,11 +56,6 @@ public class UsuarioController {
         return fb.build();
     }
 
-    /**
-     * Retrieves representation of an instance of br.com.kopp.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
     @GET
     @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,27 +74,4 @@ public class UsuarioController {
                 .build();
     }
 
-    /**
-     * Retrieves representation of an instance of br.com.kopp.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Path("count")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response count() {
-
-        Integer count;
-
-        try {
-            count = usuarioLocal.count();
-        } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
-        }
-        return FeedBuilder.create()
-                .add(count)
-                .build();
-    }
 }

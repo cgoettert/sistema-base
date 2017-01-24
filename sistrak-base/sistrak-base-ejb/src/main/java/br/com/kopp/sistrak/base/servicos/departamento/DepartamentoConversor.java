@@ -15,7 +15,7 @@ final class DepartamentoConversor {
         return (source) -> DepartamentoDto.builder()
                 .id(source.getId())
                 .descricao(source.getDescricao())
-                .origem(source.getId())
+                .origem(source.getUsuarioOrigem() == null ? null : source.getUsuarioOrigem().getId())
                 .build();
     }
     
