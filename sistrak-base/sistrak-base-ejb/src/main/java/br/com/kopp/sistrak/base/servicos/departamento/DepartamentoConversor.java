@@ -18,4 +18,13 @@ final class DepartamentoConversor {
                 .origem(source.getId())
                 .build();
     }
+    
+    public static Function<Departamento, DepartamentoListagemDto> obterConversorListagem() {
+
+        return (source) -> DepartamentoListagemDto.builder()
+                .id(source.getId())
+                .descricao(source.getDescricao())
+                .usuarioOrigem(source.getUsuarioOrigem() == null ? "-" : source.getUsuarioOrigem().getDescricao())
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.usuario;
 
+import br.com.kopp.framework.datatables.RequestData;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -14,10 +15,9 @@ import javax.ws.rs.core.Response;
 import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
-import br.com.kopp.framework.message.code.KoppCode;
 import br.com.kopp.sistrak.base.servicos.usuario.UsuarioDto;
-import br.com.kopp.sistrak.base.comum.message.SkepyCode;
 import br.com.kopp.sistrak.base.servicos.usuario.UsuarioServicoLocal;
+import javax.ws.rs.QueryParam;
 
 /**
  * REST Web Service
@@ -29,17 +29,18 @@ import br.com.kopp.sistrak.base.servicos.usuario.UsuarioServicoLocal;
 public class UsuarioController {
 
     private UsuarioServicoLocal usuarioLocal;
-    private MessageBundle skepyMessage;
+    private MessageBundle message;
 
     // só funciona com esse construtor
-    public UsuarioController(){}
-    
-    @Inject
-    public UsuarioController(UsuarioServicoLocal usuarioLocal, MessageBundle skepyMessage) {
-    	this.usuarioLocal = usuarioLocal;
-    	this.skepyMessage = skepyMessage;
+    public UsuarioController() {
     }
-    
+
+    @Inject
+    public UsuarioController(UsuarioServicoLocal usuarioLocal, MessageBundle message) {
+        this.usuarioLocal = usuarioLocal;
+        this.message = message;
+    }
+
     /**
      * Retrieves representation of an instance of br.com.kopp.GenericResource
      *
@@ -47,26 +48,24 @@ public class UsuarioController {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() {
+    public Response getAll(@QueryParam("request") RequestData request) {
 
+        FeedBuilder fb = FeedBuilder.create();
         List<UsuarioDto> usuarios;
+        Integer recordsTotal;
 
         try {
-            usuarios = usuarioLocal.getAll();
-        } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(skepyMessage.getText(ex))
-                    .build();
-        }
+            usuarios = usuarioLocal.getRange(request);
+            recordsTotal = usuarioLocal.count();
 
-        FeedBuilder fb = FeedBuilder.create()
-                .add(skepyMessage.getText(SkepyCode.MENSAGEM1))
-                .add(skepyMessage.getText(KoppCode.FORMATO_INVALIDO))
-                .add("usuarios", usuarios);
+            fb.add(request.getDraw(), recordsTotal, usuarios.size(), usuarios);
+        } catch (KoppException ex) {
+            fb.add(message.getText(ex));
+        }
 
         return fb.build();
     }
-    
+
     /**
      * Retrieves representation of an instance of br.com.kopp.GenericResource
      *
@@ -82,7 +81,7 @@ public class UsuarioController {
             usuario = usuarioLocal.get(id);
         } catch (KoppException ex) {
             return FeedBuilder.create()
-                    .add(skepyMessage.getText(ex))
+                    .add(message.getText(ex))
                     .build();
         }
         return FeedBuilder.create()
@@ -106,7 +105,7 @@ public class UsuarioController {
             count = usuarioLocal.count();
         } catch (KoppException ex) {
             return FeedBuilder.create()
-                    .add(skepyMessage.getText(ex))
+                    .add(message.getText(ex))
                     .build();
         }
         return FeedBuilder.create()

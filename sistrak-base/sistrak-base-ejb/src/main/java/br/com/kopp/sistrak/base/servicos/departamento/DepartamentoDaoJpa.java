@@ -8,9 +8,9 @@ import javax.ejb.Stateless;
  * @author cgoettert
  */
 @Stateless
-public class DepartamentoDaoHibernate extends KoppCrudDAOImpl<Departamento> implements DepartamentoDao {
+public class DepartamentoDaoJpa extends KoppCrudDAOImpl<Departamento> implements DepartamentoDao {
 
-    public DepartamentoDaoHibernate() {
+    public DepartamentoDaoJpa() {
         super(Departamento.class);
     }
 

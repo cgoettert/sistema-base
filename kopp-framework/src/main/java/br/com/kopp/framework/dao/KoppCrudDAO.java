@@ -1,5 +1,6 @@
 package br.com.kopp.framework.dao;
 
+import br.com.kopp.framework.datatables.RequestData;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface KoppCrudDAO<T> {
 
     List<T> findAll();
 
-    List<T> findRange(int[] range);
+    List<T> findRange(RequestData requestData);
 
     int count();
     

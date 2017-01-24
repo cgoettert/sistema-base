@@ -8,9 +8,9 @@ import br.com.kopp.framework.message.code.MessageCode;
  */
 public enum SkepyCode implements MessageCode {
 
-    MENSAGEM1("success"),
-    MENSAGEM2("error"),
-    MENSAGEM3("error");
+    MS0001("success"),
+    MS0002("error"),
+    MS0003("error");
 
     private final String type;
 

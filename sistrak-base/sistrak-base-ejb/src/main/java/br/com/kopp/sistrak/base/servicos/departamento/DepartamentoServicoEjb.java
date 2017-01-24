@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.base.servicos.departamento;
 
+import br.com.kopp.framework.datatables.RequestData;
 import br.com.kopp.framework.ejb.KoppEJB;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
 import java.util.List;
@@ -19,11 +20,11 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     private DepartamentoDao usuarioDepartamentoDao;
     
     @Override
-    public List<DepartamentoDto> getAll() throws SkepyException {
-        List<Departamento> lista = usuarioDepartamentoDao.findAll();
+    public List<DepartamentoListagemDto> getRange(RequestData requestData) throws SkepyException {
+        List<Departamento> lista = usuarioDepartamentoDao.findRange(requestData);
         
         return getMapper()
-                .comFunction(DepartamentoConversor.obterConversorUsuarioDepartamento())
+                .comFunction(DepartamentoConversor.obterConversorListagem())
                 .converterLista(lista);
     }
     
@@ -60,6 +61,11 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     @Override
     public void delete(Integer obj) throws SkepyException {
         usuarioDepartamentoDao.remove(new Departamento(obj));
+    }
+
+    @Override
+    public Integer count() throws SkepyException {
+        return usuarioDepartamentoDao.count();
     }
 
 }

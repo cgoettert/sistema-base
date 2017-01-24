@@ -1,5 +1,6 @@
 package br.com.kopp.framework.dao;
 
+import br.com.kopp.framework.datatables.RequestData;
 import java.util.List;
 
 /**
@@ -46,12 +47,12 @@ public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudD
     }
 
     @Override
-    public List<T> findRange(int[] range) {
+    public List<T> findRange(RequestData requestData) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(getEntityClass()));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
-        q.setMaxResults(range[1] - range[0] + 1);
-        q.setFirstResult(range[0]);
+        q.setMaxResults(requestData.getLength());
+        q.setFirstResult(requestData.getStart());
         return q.getResultList();
     }
 

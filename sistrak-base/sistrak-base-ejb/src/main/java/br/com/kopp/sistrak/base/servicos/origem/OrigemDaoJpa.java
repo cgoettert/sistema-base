@@ -8,9 +8,9 @@ import javax.ejb.Stateless;
  * @author cgoettert
  */
 @Stateless
-public class OrigemDaoHibernate extends KoppCrudDAOImpl<Origem> implements OrigemDao {
+public class OrigemDaoJpa extends KoppCrudDAOImpl<Origem> implements OrigemDao {
 
-    public OrigemDaoHibernate() {
+    public OrigemDaoJpa() {
         super(Origem.class);
     }
 

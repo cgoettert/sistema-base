@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.base.servicos.usuario;
 
+import br.com.kopp.framework.datatables.RequestData;
 import br.com.kopp.framework.message.code.KoppCode;
 import br.com.kopp.framework.ejb.KoppEJB;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
@@ -43,10 +44,10 @@ public class UsuarioServicoEjb extends KoppEJB implements UsuarioServicoLocal {
     }
 
     @Override
-    public List<UsuarioDto> getAll() {
+    public List<UsuarioDto> getRange(RequestData requestData) throws SkepyException {
         return getMapper()
                 .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
-                .converterLista(usuarioDao.findAll());
+                .converterLista(usuarioDao.findRange(requestData));
     }
 
 }

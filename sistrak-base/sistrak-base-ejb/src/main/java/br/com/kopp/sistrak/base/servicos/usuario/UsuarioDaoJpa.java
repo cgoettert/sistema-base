@@ -8,9 +8,9 @@ import javax.ejb.Stateless;
  * @author cgoettert
  */
 @Stateless
-public class UsuarioDaoHibernate extends KoppCrudDAOImpl<Usuario> implements UsuarioDao {
+public class UsuarioDaoJpa extends KoppCrudDAOImpl<Usuario> implements UsuarioDao {
 
-    public UsuarioDaoHibernate() {
+    public UsuarioDaoJpa() {
         super(Usuario.class);
     }
 

@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.departamento;
 
+import br.com.kopp.framework.datatables.RequestData;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,11 +16,13 @@ import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoDto;
+import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoListagemDto;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoServicoLocal;
+import javax.ws.rs.QueryParam;
 
 /**
  * REST Web Service
@@ -45,20 +48,20 @@ public class DepartamentoController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() {
+    public Response getAll(@QueryParam("request") RequestData request) {
 
-        List<DepartamentoDto> list;
+        FeedBuilder fb = FeedBuilder.create();
+        List<DepartamentoListagemDto> departamentos;
+        Integer recordsTotal;
 
         try {
-            list = servico.getAll();
-        } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
-        }
+            departamentos = servico.getRange(request);
+            recordsTotal = servico.count();
 
-        FeedBuilder fb = FeedBuilder.create()
-                .add(list);
+            fb.add(request.getDraw(), recordsTotal, departamentos.size(), departamentos);
+        } catch (KoppException ex) {
+            fb.add(message.getText(ex));
+        }
 
         return fb.build();
     }
