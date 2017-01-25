@@ -1,5 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.departamento;
 
+import br.com.kopp.framework.controller.KoppController;
 import br.com.kopp.framework.datatables.RequestData;
 
 import javax.enterprise.context.RequestScoped;
@@ -12,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.kopp.framework.exception.KoppException;
-import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.sistrak.base.comum.message.SkepyCode;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoDto;
@@ -30,34 +30,31 @@ import javax.ws.rs.QueryParam;
  */
 @Path("basico/administracao/departamento-usuario")
 @RequestScoped
-public class DepartamentoController {
+public class DepartamentoController extends KoppController {
 
     private DepartamentoServicoLocal servico;
-    private MessageBundle message;
 
     // só funciona com esse construtor
     public DepartamentoController() {
     }
 
     @Inject
-    public DepartamentoController(DepartamentoServicoLocal ejb, MessageBundle skepyMessage) {
+    public DepartamentoController(DepartamentoServicoLocal ejb, MessageBundle message) {
+        super(message);
         this.servico = ejb;
-        this.message = skepyMessage;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@QueryParam("request") RequestData request) {
 
-        FeedBuilder fb = FeedBuilder.create();
-
         try {
-            fb.add(servico.montarTabela(request));
+            addData(servico.montarTabela(request));
         } catch (KoppException ex) {
-            fb.add(message.getText(ex));
+            addError(ex);
         }
 
-        return fb.build();
+        return build();
     }
 
     @GET
@@ -65,24 +62,20 @@ public class DepartamentoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id) {
 
-        FeedBuilder fb = FeedBuilder.create();
-
         try {
             DepartamentoDto obj = servico.get(id);
-            fb.add(obj);
+            addData(obj);
         } catch (KoppException ex) {
-            fb.add(message.getText(ex));
+            addError(ex);
         }
 
-        return fb.build();
+        return build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response post(DepartamentoCommand command) {
-
-        FeedBuilder fb = FeedBuilder.create();
 
         DepartamentoDto input = DepartamentoDto.builder()
                 .descricao(command.getDescricao())
@@ -91,12 +84,12 @@ public class DepartamentoController {
 
         try {
             servico.create(input);
-            fb.add(message.getText(SkepyCode.MS0002));
+            addMessage(SkepyCode.MS0002);
         } catch (KoppException ex) {
-            fb.add(message.getText(ex));
+            addError(ex);
         }
 
-        return fb.build();
+        return build();
     }
 
     @PUT
@@ -104,19 +97,17 @@ public class DepartamentoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(@PathParam("id") Integer id, DepartamentoCommand command) {
 
-        FeedBuilder fb = FeedBuilder.create();
-
         DepartamentoDto input = DepartamentoDto.builder()
                 .build();
 
         try {
             servico.update(input);
-            fb.add(message.getText(SkepyCode.MS0003));
+            addMessage(SkepyCode.MS0003);
         } catch (KoppException ex) {
-            fb.add(message.getText(ex));
+            addError(ex);
         }
 
-        return fb.build();
+        return build();
     }
 
     @DELETE
@@ -124,15 +115,14 @@ public class DepartamentoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") Integer id) {
 
-        FeedBuilder fb = FeedBuilder.create();
-
         try {
             servico.delete(id);
-            fb.add(message.getText(SkepyCode.MS0004));
+            addMessage(SkepyCode.MS0004);
         } catch (KoppException ex) {
-            fb.add(message.getText(ex));
+            addError(ex);
         }
 
-        return fb.build();
+        return build();
     }
+
 }

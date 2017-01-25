@@ -1,6 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.departamento;
 
-import br.com.kopp.sistrak.base.rest.servicos.departamento.DepartamentoController;
+import br.com.kopp.framework.message.KoppMessage;
 import java.util.Map;
 
 import javax.ws.rs.core.Application;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 
 import org.mockito.MockitoAnnotations;
 
-import br.com.kopp.framework.message.KoppMessage;
 import br.com.kopp.sistrak.base.comum.exception.SkepyException;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoDto;
 import br.com.kopp.sistrak.base.servicos.departamento.DepartamentoServicoLocal;
@@ -22,8 +21,8 @@ public class DepartamentoControllerTest extends JerseyTest {
 
     @Mock
     private DepartamentoServicoLocal departamentoLocal;
-
-    @Mock
+    
+     @Mock
     private KoppMessage skepyMessage;
 
     @Override

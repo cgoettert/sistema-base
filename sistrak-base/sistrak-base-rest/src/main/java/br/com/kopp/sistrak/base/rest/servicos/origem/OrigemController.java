@@ -1,6 +1,6 @@
 package br.com.kopp.sistrak.base.rest.servicos.origem;
 
-import java.util.List;
+import br.com.kopp.framework.controller.KoppController;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -11,9 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.kopp.framework.exception.KoppException;
-import br.com.kopp.framework.message.FeedBuilder;
 import br.com.kopp.framework.message.MessageBundle;
-import br.com.kopp.sistrak.base.servicos.origem.OrigemDto;
 import br.com.kopp.sistrak.base.servicos.origem.OrigemServicoLocal;
 
 /**
@@ -23,19 +21,18 @@ import br.com.kopp.sistrak.base.servicos.origem.OrigemServicoLocal;
  */
 @Path("basico/administracao/origem-usuario")
 @RequestScoped
-public class OrigemController {
+public class OrigemController extends KoppController {
 
     private OrigemServicoLocal ejb;
-    private MessageBundle message;
 
     // só funciona com esse construtor
     public OrigemController() {
     }
 
     @Inject
-    public OrigemController(OrigemServicoLocal ejb, MessageBundle skepyMessage) {
+    public OrigemController(OrigemServicoLocal ejb, MessageBundle message) {
+        super(message);
         this.ejb = ejb;
-        this.message = skepyMessage;
     }
 
     /**
@@ -48,19 +45,13 @@ public class OrigemController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response combo() {
 
-        List<OrigemDto> list;
-
         try {
-            list = ejb.combo();
+            addData(ejb.combo());
         } catch (KoppException ex) {
-            return FeedBuilder.create()
-                    .add(message.getText(ex))
-                    .build();
+            addError(ex);
         }
 
-        FeedBuilder fb = FeedBuilder.create().add(list);
-
-        return fb.build();
+        return build();
     }
 
 }

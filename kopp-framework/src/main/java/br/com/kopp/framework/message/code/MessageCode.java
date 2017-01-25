@@ -8,5 +8,4 @@ public interface MessageCode {
     
     public String getCode();
     
-    public String getType();
 }

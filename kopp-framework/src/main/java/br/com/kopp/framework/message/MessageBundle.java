@@ -9,10 +9,10 @@ import br.com.kopp.framework.message.code.MessageCode;
  */
 public interface MessageBundle {
 
-    public MessageDTO getText(KoppException koppException);
+    public MessageDTO getText(MessageType messageType, KoppException koppException);
 
-    public MessageDTO getText(MessageCode code);
+    public MessageDTO getText(MessageType messageType, MessageCode code);
 
-    public MessageDTO getText(MessageCode code, Object... params);
+    public MessageDTO getText(MessageType messageType, MessageCode code, Object... params);
 
 }

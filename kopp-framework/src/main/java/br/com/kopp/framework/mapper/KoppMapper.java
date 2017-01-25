@@ -6,9 +6,6 @@ import java.util.function.Function;
 
 import javax.enterprise.context.RequestScoped;
 
-import br.com.kopp.framework.mapper.IKoppMapper;
-import br.com.kopp.framework.mapper.IKoppMapperComFunction;
-
 @RequestScoped
 public class KoppMapper implements IKoppMapper {
 

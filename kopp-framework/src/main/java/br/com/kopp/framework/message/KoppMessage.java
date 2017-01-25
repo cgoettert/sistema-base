@@ -20,25 +20,25 @@ public abstract class KoppMessage implements MessageBundle {
         this.bundle = ResourceBundle.getBundle(IDENT);
     }
 
-    protected MessageDTO getText(ResourceBundle bundle, MessageCode code, Object... params) {
+    protected MessageDTO getText(ResourceBundle bundle, MessageType type, MessageCode code, Object... params) {
         try {
-            return new MessageDTO(code.getType(), MessageFormat.format(bundle.getString(code.getCode()), params));
+            return new MessageDTO(type.toString(), MessageFormat.format(bundle.getString(code.getCode()), params));
         } catch (MissingResourceException mre) {
             try {
-                return new MessageDTO(code.getType(), MessageFormat.format(this.bundle.getString(code.getCode()), params));
+                return new MessageDTO(type.toString(), MessageFormat.format(this.bundle.getString(code.getCode()), params));
             } catch (MissingResourceException mree) {
-                return new MessageDTO(code.getType(), code.getCode());
+                return new MessageDTO(type.toString(), code.getCode());
             }
         }
     }
 
     @Override
-    public abstract MessageDTO getText(KoppException koppException);
+    public abstract MessageDTO getText(MessageType messageType, KoppException koppException);
 
     @Override
-    public abstract MessageDTO getText(MessageCode code);
+    public abstract MessageDTO getText(MessageType type, MessageCode code);
 
     @Override
-    public abstract MessageDTO getText(MessageCode code, Object... params);
+    public abstract MessageDTO getText(MessageType type, MessageCode code, Object... params);
 
 }

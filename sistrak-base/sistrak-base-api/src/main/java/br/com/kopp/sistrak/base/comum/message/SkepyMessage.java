@@ -4,6 +4,7 @@ import br.com.kopp.framework.exception.KoppException;
 import br.com.kopp.framework.message.KoppMessage;
 import br.com.kopp.framework.message.MessageBundle;
 import br.com.kopp.framework.message.MessageDTO;
+import br.com.kopp.framework.message.MessageType;
 import br.com.kopp.framework.message.code.MessageCode;
 import java.util.ResourceBundle;
 import javax.enterprise.context.RequestScoped;
@@ -24,18 +25,18 @@ public class SkepyMessage extends KoppMessage implements MessageBundle {
     }
 
     @Override
-    public MessageDTO getText(KoppException koppException) {
-        return getText(bundle, koppException.getCode(), koppException.getParams());
+    public MessageDTO getText(MessageType type, KoppException koppException) {
+        return getText(bundle, type, koppException.getCode(), koppException.getParams());
     }
 
     @Override
-    public MessageDTO getText(MessageCode code) {
-        return getText(bundle, code, new Object[0]);
+    public MessageDTO getText(MessageType type, MessageCode code) {
+        return getText(bundle, type, code, new Object[0]);
     }
 
     @Override
-    public MessageDTO getText(MessageCode code, Object... params) {
-        return getText(bundle, code, params);
+    public MessageDTO getText(MessageType type, MessageCode code, Object... params) {
+        return getText(bundle, type, code, params);
     }
 
 }

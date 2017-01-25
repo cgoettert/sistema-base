@@ -2,8 +2,6 @@ package br.com.kopp.sistrak.base.rest.servicos.usuario;
 
 import static org.mockito.Mockito.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.Application;

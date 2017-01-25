@@ -6,24 +6,13 @@ package br.com.kopp.framework.message.code;
  */
 public enum KoppCode implements MessageCode {
 
-    FORMATO_INVALIDO("error"),
-    VALOR_MENOR_QUE_MINIMO("error"),
-    VALOR_MAIOR_QUE_MAXIMO("error"),
-    VALOR_NULO("error");
-
-    private final String type;
-
-    private KoppCode(String type) {
-        this.type = type;
-    }
+    FORMATO_INVALIDO,
+    VALOR_MENOR_QUE_MINIMO,
+    VALOR_MAIOR_QUE_MAXIMO,
+    VALOR_NULO;
 
     @Override
     public String getCode() {
         return this.name();
-    }
-
-    @Override
-    public String getType() {
-        return this.type;
     }
 }

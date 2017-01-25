@@ -8,24 +8,14 @@ import br.com.kopp.framework.message.code.MessageCode;
  */
 public enum SkepyCode implements MessageCode {
 
-    MS0001("success"),
-    MS0002("success"),
-    MS0003("success"),
-    MS0004("success");
-
-    private final String type;
-
-    private SkepyCode(String type) {
-        this.type = type;
-    }
+    MS0001,
+    MS0002,
+    MS0003,
+    MS0004;
 
     @Override
     public String getCode() {
         return this.name();
     }
 
-    @Override
-    public String getType() {
-        return this.type;
-    }
 }
