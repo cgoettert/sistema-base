@@ -8,9 +8,9 @@ import java.util.function.Function;
  *
  * @author Leandro
  */
-final class OrigemConversor {
+final class OrigemConversorFactory {
     
-    public static Function<Origem, OrigemDto> obterConversorUsuarioOrigem() {
+    public static Function<Origem, OrigemDto> criarConversorOrigemDto() {
 
         return (source) -> OrigemDto.builder()
                 .id(source.getId())

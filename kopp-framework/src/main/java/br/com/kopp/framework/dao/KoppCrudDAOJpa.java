@@ -8,11 +8,11 @@ import java.util.List;
  *
  * @author cgoettert
  */
-public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudDAO<T> {
+public abstract class KoppCrudDAOJpa<T> extends KoppDAO<T> implements KoppCrudDAO<T> {
 
     private final Class<T> entityClass;
 
-    public KoppCrudDAOImpl(Class<T> entityClass) {
+    public KoppCrudDAOJpa(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
@@ -42,11 +42,16 @@ public abstract class KoppCrudDAOImpl<T> extends KoppDAO<T> implements KoppCrudD
 
     @Override
     public ResponseData mountTable(RequestData requestData) {
-        Long recordsTotal = this.count();
-        Long recordsFiltered = this.countRange(requestData);
-        List<T> listaBanco = this.findRange(requestData);
+        try {
 
-        return new ResponseData(requestData.getDraw(), recordsTotal, recordsFiltered, listaBanco);
+            Long recordsTotal = this.count();
+            Long recordsFiltered = this.countRange(requestData);
+            List<T> listaBanco = this.findRange(requestData);
+            return new ResponseData(requestData.getDraw(), recordsTotal, recordsFiltered, listaBanco);
+
+        } catch (Exception ex) {
+            return new ResponseData(ex.getLocalizedMessage());
+        }
     }
 
     @Override

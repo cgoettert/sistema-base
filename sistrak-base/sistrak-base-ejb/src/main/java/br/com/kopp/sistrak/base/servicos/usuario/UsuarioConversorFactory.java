@@ -8,9 +8,9 @@ import java.util.function.Function;
  *
  * @author Leandro
  */
-final class UsuarioConversor {
+final class UsuarioConversorFactory {
 
-    public static Function<Usuario, UsuarioDto> obterConversorUsuarioParaUsuarioDTO() {
+    public static Function<Usuario, UsuarioDto> criarConversorUsuarioDto() {
 
         return (source) -> UsuarioDto.builder()
                 .nome(source.getNome())

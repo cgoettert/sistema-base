@@ -22,7 +22,7 @@ public class OrigemServicoEjb extends KoppEJB implements OrigemServicoLocal {
         List<Origem> lista = usuarioOrigemDao.findAll();
         
         return getMapper()
-                .comFunction(OrigemConversor.obterConversorUsuarioOrigem())
+                .comFunction(OrigemConversorFactory.criarConversorOrigemDto())
                 .converterLista(lista);
     }
 

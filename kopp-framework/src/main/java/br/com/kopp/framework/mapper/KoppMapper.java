@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import javax.enterprise.context.RequestScoped;
 
-@RequestScoped
 public class KoppMapper implements IKoppMapper {
 
     @Override

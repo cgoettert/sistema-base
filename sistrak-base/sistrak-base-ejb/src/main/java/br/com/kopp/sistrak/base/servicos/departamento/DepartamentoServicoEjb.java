@@ -23,13 +23,13 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
     @Override
     public ResponseData montarTabela(RequestData requestData) throws SkepyException {
 
-       ResponseData responseData = usuarioDepartamentoDao.mountTable(requestData);
-       
-       responseData.setData(getMapper()
-                .comFunction(DepartamentoConversor.obterConversorListagem())
+        ResponseData responseData = usuarioDepartamentoDao.mountTable(requestData);
+
+        responseData.setData(getMapper()
+                .comFunction(DepartamentoConversorFactory.obterConversorDepartamentoListagemDto())
                 .converterLista(responseData.getData()));
-       
-       return responseData;
+
+        return responseData;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
         Departamento entity = usuarioDepartamentoDao.find(obj);
 
         return getMapper()
-                .comFunction(DepartamentoConversor.obterConversorUsuarioDepartamento())
+                .comFunction(DepartamentoConversorFactory.criarConversorDepartamentoDto())
                 .converterObjeto(entity);
     }
 
@@ -58,6 +58,7 @@ public class DepartamentoServicoEjb extends KoppEJB implements DepartamentoServi
         Departamento record = new Departamento();
         record.setId(dto.getId());
         record.setDescricao(dto.getDescricao());
+        record.setUsuarioOrigem(new Origem(dto.getOrigem()));
 
         usuarioDepartamentoDao.edit(record);
     }

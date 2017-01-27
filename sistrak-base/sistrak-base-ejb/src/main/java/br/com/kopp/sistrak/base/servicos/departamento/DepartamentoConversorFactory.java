@@ -2,15 +2,14 @@ package br.com.kopp.sistrak.base.servicos.departamento;
 
 import java.util.function.Function;
 
-
 /**
  * Fábrica de conversores de Entidade para DTO
  *
  * @author Leandro
  */
-final class DepartamentoConversor {
-    
-    public static Function<Departamento, DepartamentoDto> obterConversorUsuarioDepartamento() {
+final class DepartamentoConversorFactory {
+
+    public static Function<Departamento, DepartamentoDto> criarConversorDepartamentoDto() {
 
         return (source) -> DepartamentoDto.builder()
                 .id(source.getId())
@@ -18,8 +17,8 @@ final class DepartamentoConversor {
                 .origem(source.getUsuarioOrigem() == null ? null : source.getUsuarioOrigem().getId())
                 .build();
     }
-    
-    public static Function<Departamento, DepartamentoListagemDto> obterConversorListagem() {
+
+    public static Function<Departamento, DepartamentoListagemDto> obterConversorDepartamentoListagemDto() {
 
         return (source) -> DepartamentoListagemDto.builder()
                 .id(source.getId())

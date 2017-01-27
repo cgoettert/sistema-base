@@ -25,7 +25,7 @@ public class UsuarioServicoEjb extends KoppEJB implements UsuarioServicoLocal {
         ResponseData responseData = usuarioDao.mountTable(requestData);
 
         responseData.setData(getMapper()
-                .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
+                .comFunction(UsuarioConversorFactory.criarConversorUsuarioDto())
                 .converterLista(responseData.getData()));
 
         return responseData;
@@ -46,7 +46,7 @@ public class UsuarioServicoEjb extends KoppEJB implements UsuarioServicoLocal {
         }
 
         return getMapper()
-                .comFunction(UsuarioConversor.obterConversorUsuarioParaUsuarioDTO())
+                .comFunction(UsuarioConversorFactory.criarConversorUsuarioDto())
                 .converterObjeto(usuario);
     }
 

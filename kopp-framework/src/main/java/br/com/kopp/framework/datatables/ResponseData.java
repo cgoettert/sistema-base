@@ -14,8 +14,13 @@ public class ResponseData implements Serializable {
     private Long recordsTotal;
     private Long recordsFiltered;
     private List data;
+    private String error;
 
     public ResponseData() {
+    }
+
+    public ResponseData(String error) {
+        this.error = error;
     }
 
     public ResponseData(Integer draw, Long recordsTotal, Long recordsFiltered, List data) {
@@ -55,6 +60,14 @@ public class ResponseData implements Serializable {
 
     public void setData(List data) {
         this.data = data;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
 }
